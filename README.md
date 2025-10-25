@@ -42,7 +42,7 @@ server {
 }
 ```
 
-## Google Cloud pre-requisities
+## Google Cloud pre-requisites
 
 The user must have an existing Google Cloud account with billing set up, and ideally an existing Google Cloud project.
 
@@ -55,3 +55,14 @@ The user must follow these steps:
    ```bash
    gcloud auth application-default login
    ```
+
+## How to use the Gemini CLI Cloud Run MCP Extension
+
+The Gemini CLI Cloud Run MCP Extension allows you to deploy applications to Google Cloud Run by interacting with the Gemini CLI agent. Here are some examples of how you can instruct the agent:
+
+- **Deploying a local folder:** "Deploy the folder at `/path/to/my/app` to Cloud Run."
+- **Deploying file contents:** "Deploy the Node.js application in the current directory to Cloud Run."
+- **Deploying a container image:** "Deploy the container image `gcr.io/cloudrun/hello` to Cloud Run."
+- **Listing services:** "List all Cloud Run services in project `my-project`."
+- **Getting service details:** "Get details for the `my-service` service in project `my-project`."
+- **Getting service logs:** "Get logs for the `my-service` service in project `my-project`."
