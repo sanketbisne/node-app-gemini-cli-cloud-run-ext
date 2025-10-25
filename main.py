@@ -1,5 +1,7 @@
 from fastapi import FastAPI
+from starlette.responses import StreamingResponse
 import os
+import asyncio
 
 app = FastAPI()
 
@@ -12,6 +14,14 @@ async def mcp_endpoint(data: dict):
     # This is where you would implement your Model Context Protocol logic
     # For now, it just echoes the received data
     return {"received_data": data, "status": "processed"}
+
+@app.get("/stream")
+async def sse_stream():
+    async def event_generator():
+        for i in range(5):
+            yield f"data: Hello from SSE! Event {i+1}\n\n"
+            await asyncio.sleep(1)
+    return StreamingResponse(event_generator(), media_type="text/event-stream")
 
 if __name__ == "__main__":
     import uvicorn
