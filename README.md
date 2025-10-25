@@ -94,3 +94,13 @@ To make this application work, you need to enable the Firestore API and grant ap
 1.  **Deploy the application:** Once the Firestore API is enabled and permissions are set, deploy the application to Cloud Run.
 2.  **Open in browser:** Access the deployed service URL (e.g., `https://sanket-mcp-cloud-run-jeqyasc2za-ew.a.run.app`).
 3.  **Send messages:** Type a message in the input field and click "Send". Messages will appear in real-time for all connected clients.
+
+### Deployment with Procfile
+
+For Python applications, Cloud Run can use a `Procfile` to specify the command to run your application. This ensures that the web server (Uvicorn in this case) starts correctly and listens on the port expected by Cloud Run.
+
+The `Procfile` in this repository contains:
+```
+web: uvicorn main:app --host 0.0.0.0 --port $PORT
+```
+This command tells Cloud Run to run the `app` object from `main.py` using Uvicorn, binding it to all network interfaces (`0.0.0.0`) and using the port specified by the `$PORT` environment variable.
