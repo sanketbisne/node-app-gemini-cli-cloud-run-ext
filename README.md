@@ -66,3 +66,31 @@ The Gemini CLI Cloud Run MCP Extension allows you to deploy applications to Goog
 - **Listing services:** "List all Cloud Run services in project `my-project`."
 - **Getting service details:** "Get details for the `my-service` service in project `my-project`."
 - **Getting service logs:** "Get logs for the `my-service` service in project `my-project`."
+
+## Real-time Chat Application with Firestore and SSE
+
+This repository now contains a FastAPI application that demonstrates a real-time chat application using Google Cloud Firestore and Server-Sent Events (SSE).
+
+### How it works:
+-   The root endpoint (`/`) serves an HTML page with a simple chat interface.
+-   The `/send_message` endpoint accepts POST requests with chat messages and stores them in a Firestore collection named `chat_messages`.
+-   The `/stream` (SSE) endpoint streams existing chat messages from Firestore and then listens for new messages in real-time, pushing them to connected clients.
+
+### Google Cloud Firestore Setup:
+
+To make this application work, you need to enable the Firestore API and grant appropriate permissions to your Cloud Run service account:
+
+1.  **Enable Firestore API:**
+    Visit the Google Cloud Console and enable the Firestore API for your project:
+    `https://console.cloud.google.com/apis/library/firestore.googleapis.com?project=mcp-gcp-project`
+
+2.  **Grant IAM Permissions:**
+    Your Cloud Run service account (typically `PROJECT_NUMBER-compute@developer.gserviceaccount.com`) needs the "Cloud Datastore User" role (which includes Firestore permissions) or a custom role with specific Firestore permissions.
+    You can grant this role via the IAM & Admin section in the Google Cloud Console:
+    `https://console.cloud.google.com/iam-admin/iam?project=mcp-gcp-project`
+
+### How to use the Chat Application:
+
+1.  **Deploy the application:** Once the Firestore API is enabled and permissions are set, deploy the application to Cloud Run.
+2.  **Open in browser:** Access the deployed service URL (e.g., `https://sanket-mcp-cloud-run-jeqyasc2za-ew.a.run.app`).
+3.  **Send messages:** Type a message in the input field and click "Send". Messages will appear in real-time for all connected clients.
